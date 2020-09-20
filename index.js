@@ -1,5 +1,5 @@
 
-import { blue, red, navigator } from './modules/web_navigator.js';
+import { blue, red, navigator } from './modules/webNavigator.js';
 
 navigator();
 
