@@ -24,13 +24,13 @@ let tempFocusWord = {
     {
         definition: "i'm here temporarily!",
         partOfSpeech: "noun",
-        synonyms: ["synonym1, synonym2, synonym3"],
+        synonyms: ['synonym1', 'synonym2', 'synonym3'],
         typeOf: ["template"]
     },
     {
         definition: "i'm also here temporarily, but differently!",
         partOfSpeech: "noun",
-        synonyms: ["synonym4, synonym5, synonym6"],
+        synonyms: ["synonym3", "synonym4", "synonym5", "synonym6"],
         typeOf: ["template"]
     }
     ]
@@ -43,9 +43,9 @@ export function drawNavigator() {
     let focusPos = {x: navigatorSize.width / 2, y: navigatorSize.height / 2};
     let focusBubble = createBubble(tempFocusWord, focusPos);
 
-    if(tempFocusWord.results.length > 0) {
-        console.log("Not empty.")
-    }
+
+    let category = "synonyms";
+    setCategory(category);
 }
 
 function createBubble(value, pos) {
@@ -58,6 +58,7 @@ function createBubble(value, pos) {
     //Draw Label & Text
     let label = drawLabel(value, bubble);
 
+    //Create Bubble Object
     let bubbleObject = {bubble: bubble, label: label};
     return bubbleObject;
 }
@@ -66,4 +67,22 @@ function drawLabel(value, bubble) {
     let label = draw.text(value.word)
     .font({'size':'22px','anchor':'middle'})
     .move(bubble.width() / 2 + bubble.x(), bubble.height() / 3 + bubble.y());
+}
+
+function setCategory(category) {
+    let associations = []
+
+    if(tempFocusWord.results.length > 0) {
+        tempFocusWord.results.forEach((result, i) => {
+            if(result[category].length > 0) {
+                result[category].forEach(( element, i) => {
+                    associations.push(element);
+                })
+            }
+        })
+
+        associations = [...new Set(associations)]
+
+        console.log(associations);
+    }
 }
