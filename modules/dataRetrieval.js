@@ -1,6 +1,6 @@
 import { API_KEY } from './keys.js';
 
-export function getWordData(word) {
+export function getWordData(word, ) {
 
     const results = {
 
