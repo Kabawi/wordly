@@ -9,12 +9,7 @@
     border-color: #285e8e; /*set the color you want here*/
 }
 
-.main {
-}
-
 #navigator {
-
-}
-
-#infoDisplay {
+    height: 80vh;
+    width: 65vw;
 }
