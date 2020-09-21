@@ -1,11 +1,15 @@
 import { getWordData } from './modules/dataRetrieval.js';
-import { drawNavigator } from './modules/webNavigator/webNavigator.js';
+import { setCategory } from './modules/webNavigator/webNavigator.js';
 
 
-drawNavigator();
+// drawNavigator();
 
 getWordData('manifest');
 
-// console.log(word)
+window.onload = () => {
+    document.querySelector("#categories").addEventListener("change", categoryDropdown);
+}
 
-// setFocus(word);
+function categoryDropdown(event) {
+    setCategory(event.target.value);
+}

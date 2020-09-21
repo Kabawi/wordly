@@ -25,7 +25,7 @@ export function createBubble(draw, value, pos, focusing) {
     }
 
     //Create Bubble Object
-    let bubbleObj = {ellipse: bubbleEllipse, label: bubbleLabel};
+    let bubbleObj = {wordObj: value, ellipse: bubbleEllipse, label: bubbleLabel};
     return bubbleObj;
 }
 

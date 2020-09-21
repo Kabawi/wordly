@@ -1,5 +1,5 @@
 import { API_KEY } from './keys.js';
-import { setFocus } from './webNavigator/webNavigator.js';
+import { setWord } from './webNavigator/webNavigator.js';
 
 export function getWordData(word) {
 
@@ -18,8 +18,7 @@ export function getWordData(word) {
         const data = response.data
 
         //Change Navigator Focus
-        setFocus(data);
-
+        setWord(data);
 
         // console.log(data)
         // console.log(data.word)
