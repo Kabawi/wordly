@@ -6,12 +6,15 @@
 // export { blue, red }
 
 export function drawNavigator() {
-    let navigatorSize = {width: 1200, height: 800}
-
+    let navigatorSize = {width: 1200, height: 800};
     let draw = SVG('navigator').size(navigatorSize.width, navigatorSize.height);
-    let backgroundColour = draw.rect(navigatorSize.width, navigatorSize.height).fill("black");
-    
-    console.log(backgroundColour.height())
+    // let corners = [];
+    let border = draw.polyline('0,0 0,800, 1200,800, 1200,0 0,0').fill("white").stroke({width: 4, color: "black"});
+
 }
 
+function drawBubble() {
+    let bubbleColour = "grey"
+    // let focusBubble = draw.ellipse
+}
 
