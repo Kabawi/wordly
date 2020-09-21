@@ -13,7 +13,7 @@ export function getWordData(word) {
         }
     }
     
-    return axios(results) 
+    axios(results) 
     .then(response => {
         const data = response.data
 

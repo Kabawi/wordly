@@ -1,5 +1,5 @@
 //Navigator Specs
-import { createBubble, changeLabel } from './bubble.js';
+import { createBubble, findPositionAroundFocus } from './bubble.js';
 
 let navigatorSize = {width: 1200, height: 800};
 let draw = SVG('navigator').size(navigatorSize.width, navigatorSize.height);
@@ -21,18 +21,18 @@ let associations = []
 let tempFocusWord = {
     word: "tempWord",
     results:[
-    {
-        definition: "i'm here temporarily!",
-        partOfSpeech: "noun",
-        synonyms: ['synonym1', 'synonym2', 'synonym3'],
-        typeOf: ["template"]
-    },
-    {
-        definition: "i'm also here temporarily, but differently!",
-        partOfSpeech: "noun",
-        synonyms: ["synonym3", "synonym4", "synonym5", "synonym6"],
-        typeOf: ["template"]
-    },
+    // {
+    //     definition: "i'm here temporarily!",
+    //     partOfSpeech: "noun",
+    //     synonyms: ['synonym1', 'synonym2', 'synonym3'],
+    //     typeOf: ["template"]
+    // },
+    // {
+    //     definition: "i'm also here temporarily, but differently!",
+    //     partOfSpeech: "noun",
+    //     synonyms: ["synonym3", "synonym4", "synonym5", "synonym6"],
+    //     typeOf: ["template"]
+    // },
     // {
     //     definition: "i'm also here temporarily, but differently temporarily!",
     //     partOfSpeech: "noun",
@@ -48,61 +48,79 @@ export function drawNavigator() {
     focusBubble = createBubble(draw, tempFocusWord, focusPosition, true);
 
     associationCategory = "synonyms";
-    associations = getAssociations(associationCategory);
+    associations = getAssociations(tempFocusWord, associationCategory);
 
-    createRelations(focusBubble, associations)
+    if(associations != null) {
+        createRelations(focusBubble, associations)
+    }
 }
 
 //////      Category Relations         //////
 
-function createRelations(focusBubble, associations) {
-    associations.forEach((association, i) => {
-        let position = findPositionAroundFocus(200, focusBubble, firstRadiusDegrees, i);
-        createBubble(draw, association, position, false);
-    })
-}
-
 export function setFocus(newWord) {
-    // console.log(focusBubble.label.text())
-    console.log('Changed focus word to newWord.word')
+    // console.log('Changed focus word to ' + newWord.word)
+
+    // console.log(newWord)
     
-    changeLabel(focusBubble, newWord);
-    associations = getAssociations(associationCategory);
+    draw.clear();
+    focusBubble = createBubble(draw, newWord, focusPosition, true);
+    createRelations(focusBubble, getAssociations(newWord, associationCategory));
 }
 
-function getAssociations(category) {
+function getAssociations(word, category) {
     let associations = []
 
-    if(tempFocusWord.results.length > 0) {
-        tempFocusWord.results.forEach((result) => {
-            if(result[category].length > 0) {
-                result[category].forEach(( element) => {
+    if(word.results.length > 0) {
+        word.results.forEach((result) => {
+            if(result[category] != null && result[category].length > 0) {
+                result[category].forEach((element) => {
                     associations.push(element);
                 })
             }
         })
 
         associations = [...new Set(associations)]
-        // console.log(associations);
+        console.log(associations);
         return associations;
     }
 }
 
-function findPositionAroundFocus(radius, focusBubble, degrees, index) {
-    let x = 0;
-    let y = 0;
-    let i = index + 1;
+function createRelations(focusBubble, associations) {
+    if(associations.length > 0) {
+        let radiusDegrees = firstRadiusDegrees
+        
+        if(associations.length < firstRadiusCount) {
+            radiusDegrees = 360 / associations.length;
+        } else if (associations.length < firstRadiusCount + secondRadiusCount) {
+            radiusDegrees = 360 / (associations.length - firstRadiusCount);
+        }
 
-    let horizontalExtension = 1.5;
+        associations.forEach((association, i) => {
+            let position = {};
 
-    x = (radius * horizontalExtension) *  Math.cos(getRadians(degrees * i)) + (focusBubble.ellipse.x() + focusBubble.ellipse.width() / 2);
-    y = radius *  Math.sin(getRadians(degrees * i)) + (focusBubble.ellipse.y() + focusBubble.ellipse.height() / 2);
+            //First Radius
+            if(i < firstRadiusCount) {
+                if(associations.length < firstRadiusCount){
+                    position = findPositionAroundFocus(150, focusBubble, radiusDegrees, i, 90);
+                } else {
+                    position = findPositionAroundFocus(150, focusBubble, firstRadiusDegrees, i, 90);
+                }
+                createBubble(draw, association, position, false);
+            }
 
-    return {x: x, y: y};
-}
+            // Second Radius
+            else if (i < (firstRadiusCount + secondRadiusCount)) {
+                if (associations.length < firstRadiusCount + secondRadiusCount) {
+                    console.log("hit")
+                    position = findPositionAroundFocus(300, focusBubble, radiusDegrees, i, 90);
+                } else {
+                    position = findPositionAroundFocus(300, focusBubble, secondRadiusDegrees, i, 90);
+                }
+                createBubble(draw, association, position, false);
 
-function getRadians(degrees) {
-    let radians = degrees * Math.PI;
-    radians = radians / 180;
-    return radians;
+            } else {
+                return;
+            }
+        })
+    }
 }

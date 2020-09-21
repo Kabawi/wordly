@@ -32,13 +32,39 @@ function drawLabel(draw, value, ellipse) {
     return label;
 }
 
-function setPosition(draw, bubbleObj, newPosition) {
-    //find bubble in svg
+export function findPositionAroundFocus(radius, focusBubble, degrees, index, offset) {
+    let x = 0;
+    let y = 0;
+    let i = index + 1;
 
-    //set ellipse and label positions
+    let horizontalExtension = 1.5;
+
+    if(offset == null) {
+        x = (radius * horizontalExtension) *  Math.cos(getRadians(degrees * i)) + (focusBubble.ellipse.x() + focusBubble.ellipse.width() / 2);
+        y = radius *  Math.sin(getRadians(degrees * i)) + (focusBubble.ellipse.y() + focusBubble.ellipse.height() / 2);
+    }
+    else {
+        x = (radius * horizontalExtension) *  Math.cos(getRadians(offset + (degrees * i))) + (focusBubble.ellipse.x() + focusBubble.ellipse.width() / 2);
+        y = radius *  Math.sin(getRadians(offset + (degrees * i))) + (focusBubble.ellipse.y() + focusBubble.ellipse.height() / 2);
+    
+    }
+
+    return {x: x, y: y};
 }
 
-export function changeLabel(focusBubble, value) {
-    focusBubble.label.text(value.word);
-    // console.log(focusBubble)
+function getRadians(degrees) {
+    let radians = degrees * Math.PI;
+    radians = radians / 180;
+    return radians;
 }
+
+// function setPosition(draw, bubbleObj, newPosition) {
+//     //find bubble in svg
+
+//     //set ellipse and label positions
+// }
+
+// export function changeLabel(focusBubble, value) {
+//     // focusBubble.label.text(value.word);
+//     // console.log(focusBubble)
+// }
