@@ -1,5 +1,5 @@
 import { blue, red, navigator } from './modules/webNavigator.js';
-import { getWordData } from './modules/webNavigator.js';
+import { getWordData } from './modules/dataRetrieval.js';
 
 getWordData('manifest');
 navigator();

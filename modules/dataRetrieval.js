@@ -1,13 +1,15 @@
-import { API_KEY } from './modules/keys.js';
+import { API_KEY } from './keys.js';
 
-function getWordData(word) {
+export function getWordData(word) {
 
-    const results = 
+    const results = {
+
         url: `https://wordsapiv1.p.rapidapi.com/words/${word}`,
         method: 'GET',
         headers: {
         'x-rapidapi-host': 'wordsapiv1.p.rapidapi.com',
-        'x-rapidapi-key': API_KEY
+        'x-rapidapi-key': `${API_KEY}`
+        }
     }
 
     axios(results) 
@@ -15,7 +17,7 @@ function getWordData(word) {
         const data = response.data
         console.log(data)
         console.log(data.word)
-       
+    
         //identify title of word
         let wordTitle = document.getElementById("wordTitle")
         //display title on page
