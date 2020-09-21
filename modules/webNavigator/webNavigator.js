@@ -5,8 +5,11 @@ let navigatorSize = {width: 1200, height: 800};
 let draw = SVG('navigator').size(navigatorSize.width, navigatorSize.height);
 let backgroundColour = "white"
 
-let firstRadiusCount = 4;
+let firstRadiusCount = 6;
 let firstRadiusDegrees = 360 / firstRadiusCount;
+
+let secondRadiusCount = 8;
+let secondRadiusDegrees = 360 / secondRadiusCount;
 
 //Temp Variables
 let tempFocusWord = {
@@ -23,7 +26,13 @@ let tempFocusWord = {
         partOfSpeech: "noun",
         synonyms: ["synonym3", "synonym4", "synonym5", "synonym6"],
         typeOf: ["template"]
-    }
+    },
+    // {
+    //     definition: "i'm also here temporarily, but differently!",
+    //     partOfSpeech: "noun",
+    //     synonyms: ["synonym8", "synonym9", "synonym10", "synonym11", "synonym12", "synonym13", "synonym14"],
+    //     typeOf: ["template"]
+    // }
     ]
 }
 
