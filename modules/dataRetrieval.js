@@ -19,35 +19,35 @@ export function getWordData(word, ) {
         console.log(data.word)
     
         //identify title of word
-        let wordTitle = document.getElementById("wordTitle")
+        // let wordTitle = document.getElementById("wordTitle")
         //display title on page
-        wordTitle.textContent = data.word
+        // wordTitle.textContent = data.word
         
         //identify wordDef element
-        let wordDef = document.getElementById("wordDef")
+        // let wordDef = document.getElementById("wordDef")
         //display data if available
-        if (data.results) {
-            console.log(data.results[0].definition)
-            wordDef.textContent = `Definition: ${data.results[0].definition}`
-        } else {
-            wordDef.textContent = ''
-        }
+        // if (data.results) {
+            // console.log(data.results[0].definition)
+            // wordDef.textContent = `Definition: ${data.results[0].definition}`
+        // } else {
+            // wordDef.textContent = ''
+        // }
         //identify wordSyllable element
-        let wordSyllables = document.getElementById("wordSyllables")
+        // let wordSyllables = document.getElementById("wordSyllables")
         //display data if available
-        if (data.syllables) {
-            console.log(data.syllables.count)
-            wordSyllables.textContent = `number of syllables: ${data.syllables.count}`
-            } else {
-            wordSyllables.textContent = ''
-            }
+        // if (data.syllables) {
+        //     console.log(data.syllables.count)
+        //     wordSyllables.textContent = `number of syllables: ${data.syllables.count}`
+        //     } else {
+        //     wordSyllables.textContent = ''
+        //     }
         //display frequency element
-        let wordFreq = document.getElementById('wordFreq')
+        // let wordFreq = document.getElementById('wordFreq')
         //display data if available
-        if (data.frequency) {
-            wordFreq = textContent = `Frequency: ${data.frequency}`
-        } else {
-            wordFreq = ''
-        }
+//         if (data.frequency) {
+//             wordFreq = textContent = `Frequency: ${data.frequency}`
+//         } else {
+//             wordFreq = ''
+//         }
     })  
 }
