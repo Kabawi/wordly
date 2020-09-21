@@ -1,5 +1,5 @@
 //Navigator Specs
-import { createBubble } from './bubble.js';
+import { createBubble, changeLabel } from './bubble.js';
 
 let navigatorSize = {width: 1200, height: 800};
 let draw = SVG('navigator').size(navigatorSize.width, navigatorSize.height);
@@ -10,6 +10,12 @@ let firstRadiusDegrees = 360 / firstRadiusCount;
 
 let secondRadiusCount = 8;
 let secondRadiusDegrees = 360 / secondRadiusCount;
+
+let focusBubble = {};
+let focusPosition = {x: navigatorSize.width / 2, y: navigatorSize.height / 2};
+
+let associationCategory = '';
+let associations = []
 
 //Temp Variables
 let tempFocusWord = {
@@ -28,7 +34,7 @@ let tempFocusWord = {
         typeOf: ["template"]
     },
     // {
-    //     definition: "i'm also here temporarily, but differently!",
+    //     definition: "i'm also here temporarily, but differently temporarily!",
     //     partOfSpeech: "noun",
     //     synonyms: ["synonym8", "synonym9", "synonym10", "synonym11", "synonym12", "synonym13", "synonym14"],
     //     typeOf: ["template"]
@@ -39,11 +45,10 @@ let tempFocusWord = {
 export function drawNavigator() {
     let border = draw.polyline('0,0 0,800, 1200,800, 1200,0 0,0').fill(backgroundColour).stroke({width: 4, color: "black"});
 
-    let focusPosition = {x: navigatorSize.width / 2, y: navigatorSize.height / 2};
-    let focusBubble = createBubble(draw, tempFocusWord, focusPosition, true);
+    focusBubble = createBubble(draw, tempFocusWord, focusPosition, true);
 
-    let associationCategory = "synonyms";
-    let associations = getAssociations(associationCategory);
+    associationCategory = "synonyms";
+    associations = getAssociations(associationCategory);
 
     createRelations(focusBubble, associations)
 }
@@ -55,6 +60,14 @@ function createRelations(focusBubble, associations) {
         let position = findPositionAroundFocus(200, focusBubble, firstRadiusDegrees, i);
         createBubble(draw, association, position, false);
     })
+}
+
+export function setFocus(newWord) {
+    // console.log(focusBubble.label.text())
+    console.log('Changed focus word to newWord.word')
+    
+    changeLabel(focusBubble, newWord);
+    associations = getAssociations(associationCategory);
 }
 
 function getAssociations(category) {
@@ -70,7 +83,7 @@ function getAssociations(category) {
         })
 
         associations = [...new Set(associations)]
-        console.log(associations);
+        // console.log(associations);
         return associations;
     }
 }

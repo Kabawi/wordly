@@ -37,3 +37,8 @@ function setPosition(draw, bubbleObj, newPosition) {
 
     //set ellipse and label positions
 }
+
+export function changeLabel(focusBubble, value) {
+    focusBubble.label.text(value.word);
+    // console.log(focusBubble)
+}
