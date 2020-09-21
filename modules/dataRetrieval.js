@@ -1,4 +1,5 @@
 import { API_KEY } from './keys.js';
+import { setWord } from './webNavigator/webNavigator.js';
 
 export function getWordData(word, ) {
 
@@ -11,12 +12,16 @@ export function getWordData(word, ) {
         'x-rapidapi-key': `${API_KEY}`
         }
     }
-
+    
     axios(results) 
     .then(response => {
         const data = response.data
-        console.log(data)
-        console.log(data.word)
+
+        //Change Navigator Focus
+        setWord(data);
+
+        // console.log(data)
+        // console.log(data.word)
     
         //identify title of word
         // let wordTitle = document.getElementById("wordTitle")
@@ -35,6 +40,23 @@ export function getWordData(word, ) {
         //identify wordSyllable element
         // let wordSyllables = document.getElementById("wordSyllables")
         //display data if available
+        // //identify title of word
+        // let wordTitle = document.getElementById("wordTitle")
+        // //display title on page
+        // wordTitle.textContent = data.word
+        
+        // //identify wordDef element
+        // let wordDef = document.getElementById("wordDef")
+        // //display data if available
+        // if (data.results) {
+        //     console.log(data.results[0].definition)
+        //     wordDef.textContent = `Definition: ${data.results[0].definition}`
+        // } else {
+        //     wordDef.textContent = ''
+        // }
+        // //identify wordSyllable element
+        // let wordSyllables = document.getElementById("wordSyllables")
+        // //display data if available
         // if (data.syllables) {
         //     console.log(data.syllables.count)
         //     wordSyllables.textContent = `number of syllables: ${data.syllables.count}`
@@ -50,4 +72,6 @@ export function getWordData(word, ) {
 //             wordFreq = ''
 //         }
     })  
+
+    .catch((error) => { console.error(error) })
 }
