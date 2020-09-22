@@ -18,15 +18,16 @@
   display: block;
 }
 
+#controls {
+  width: 20vw;
+  display: block;
+}
+
 #bubble_normal {
   fill: #fff;
 }
 
 #bubble_hover {
   fill: lightgray;
-}
-
-#definitionsList > li {
-    padding-right: 5rem;
 }
 /*# sourceMappingURL=index.css.map */
