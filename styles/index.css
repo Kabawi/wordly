@@ -25,4 +25,8 @@
 #bubble_hover {
   fill: lightgray;
 }
+
+#definitionsList > li {
+    padding-right: 5rem;
+}
 /*# sourceMappingURL=index.css.map */
