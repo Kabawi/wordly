@@ -1,6 +1,7 @@
 //Bubble Specs
 let size = {width: 170, height: 75}
-let backgroundColour = "white";
+let normalColour = "white";
+let hoverColour = "grey"
 
 let firstRadiusCount = 6;
 let firstRadiusDegrees = 360 / firstRadiusCount;
@@ -8,12 +9,18 @@ let firstRadiusDegrees = 360 / firstRadiusCount;
 let secondRadiusCount = 8;
 let secondRadiusDegrees = 360 / secondRadiusCount;
 
+
+
 export function createBubble(draw, value, pos, focusing) {
+
+    // let draw = document.getElementById('navigator');
+    // let bubbleObj = SVG(navigator);
+
     //Draw Bubble
     let bubbleEllipse = draw.ellipse(size.width, size.height)
     .move(pos.x - size.width / 2, draw.height() - pos.y - size.height / 2)
     .stroke({width: 2, color: "black"})
-    .fill(backgroundColour);
+    .fill(normalColour);
 
     //Draw Label & Text
     let bubbleLabel;
@@ -22,6 +29,15 @@ export function createBubble(draw, value, pos, focusing) {
     } else {
         bubbleLabel = drawLabel(draw, value, bubbleEllipse);
     }
+
+    bubbleEllipse.on('mouseover', hoverOver);
+    bubbleEllipse.on('mouseleave', hoverOff);
+ 
+    // draw.setAttribute("display", "block")
+    // let text = document.querySelector('text')
+    // text.setAttribute("pointer-events", "none");//.attr("pointer-events: none")
+
+    // bubbleLabel.off('mouseover','mouseleave')
 
     //Create Bubble Object
     let bubbleObj = {wordObj: value, ellipse: bubbleEllipse, label: bubbleLabel};
@@ -58,7 +74,9 @@ export function createAssociateBubbles(draw, focusBubble, associations) {
                 } else {
                     position = findPositionAroundFocus(150, focusBubble, firstRadiusDegrees, i, 1.5, 0, 90);
                 }
-                associateBubbles.push(createBubble(draw, association, position, false));
+
+                let associateBubble = createBubble(draw, association, position, false);
+                associateBubbles.push(associateBubble);
             }
 
             // Second Radius
@@ -67,16 +85,22 @@ export function createAssociateBubbles(draw, focusBubble, associations) {
                     position = findPositionAroundFocus(280, focusBubble, radiusDegrees, i, 1.4, 0, 90);
                 } else {
                     position = findPositionAroundFocus(280, focusBubble, secondRadiusDegrees, i, 0, 0, 90);
-                }
-                associateBubbles.push(createBubble(draw, association, position, false));
+                }   
 
-            } else {
-                return associateBubbles;
+                let associateBubble = createBubble(draw, association, position, false);
+                associateBubbles.push(associateBubble);
             }
         })
 
         return associateBubbles;
     }
+}
+
+export function onHover(){
+    associateBubbles.forEach((associateBubble) => {
+        associateBubble.on('mouseover', hoverOver);
+        associateBubble.on('mouseleave', hoverOff);
+    })
 }
 
 export function findPositionAroundFocus(radius, focusBubble, degrees, index, xOffset = 0, yOffset = 0, angleOffset = 0) {
@@ -106,6 +130,17 @@ function getRadians(degrees) {
     let radians = degrees * Math.PI;
     radians = radians / 180;
     return radians;
+}
+
+function hoverOver() {
+    this.fill(hoverColour);
+    // focus_label.text(`${this.data[focus].toFixed(2)}`)
+    // .move(this.x() + 31/2, this.y());
+}
+
+function hoverOff() {
+    this.fill(normalColour);
+    // focus_label.text('');
 }
 
 // function setPosition(draw, bubbleObj, newPosition) {
