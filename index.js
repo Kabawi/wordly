@@ -5,7 +5,7 @@ import { setCategory } from './modules/webNavigator/webNavigator.js';
 function getValueThenData(event) {
     event.preventDefault()
     const searchInput = document.getElementById("searchInput").value;
-    console.log(searchInput);
+    console.log(`Input Recieved: ${searchInput}`);
     getWordData(searchInput);
 }
 

@@ -1,18 +1,18 @@
 //Navigator Specs
 import { getWordData } from './../dataRetrieval.js';
-import { createBubble, createAssociateBubbles, normalColour, hoverColour } from './bubble.js';
+import { createFocusBubble, createAssociateBubbles, bubbleIdleColour, bubbleHoverColour } from './bubble.js';
 
-let navigatorSize = {width: 1200, height: 800};
+// SVG Canvas
+let svgSize = {width: 1200, height: 800};
+let svgCentre = {x: svgSize.width / 2, y: svgSize.height / 2};
 
-let draw = SVG(`navigator`);
-draw.size(navigatorSize.width, navigatorSize.height)
+let svgBackground;
+let svgBackgroundColour = "white"
+let svgBorderColour = "black"
+let draw = SVG(`navigator`).size(svgSize.width, svgSize.height)
 
-let backgroundColour = "white"
-let border;
-
+// Bubbles
 let focusBubble = {};
-let focusPosition = {x: navigatorSize.width / 2, y: navigatorSize.height / 2};
-
 let associationCategory = 'synonyms';
 let associations = []
 let associateBubbles = []
@@ -22,105 +22,116 @@ export function setWord(wordObj) {
 }
 
 export function setCategory(category) {
-    // console.log(`Category Change Hit: ${category}`);
     associationCategory = category;
     drawToScreen(focusBubble.wordObj);
 }
 
+//#region Drawing
+
 function drawToScreen(wordObj) {
-    // console.log("Drawing to Screen");
     draw.clear();
-    border = draw.polyline(`0,0 0,${navigatorSize.height}, ${navigatorSize.width},${navigatorSize.height}, ${navigatorSize.width},0 0,0`)
-    .fill(backgroundColour).stroke({width: 4, color: "black"});
-    focusBubble = createBubble(draw, wordObj, focusPosition, true);
-    setAssociations(focusBubble);
+
+    drawBackgroundAndBorder();
+    
+    drawFocusBubble(wordObj);
+    drawAssociateBubbles();
 
     bubbleInteractLoop();
-    // onHover();
 }
 
-function setAssociations(focusBubble) {
-    associations = getAssociations(focusBubble.wordObj, associationCategory);
-    if(associations != null) {
+function drawBackgroundAndBorder() {
+    svgBackground = draw.polyline(`0,0 0,${svgSize.height}, ${svgSize.width},${svgSize.height}, ${svgSize.width},0 0,0`)
+    .fill(svgBackgroundColour).stroke({width: 4, color: svgBorderColour});
+}
+
+function drawFocusBubble(wordObj) {
+    focusBubble = createFocusBubble(draw, wordObj, svgCentre);
+}
+
+function drawAssociateBubbles() {    
+    retrieveAssociationData(focusBubble.wordObj, associationCategory);
+    if(associations && associations.length > 0) {
         associateBubbles = createAssociateBubbles(draw, focusBubble, associations);
+    }
+    else {
+        throw "No Associations Found."
     }
 }
 
-function getAssociations(word, category) {
-    // console.log(category)
-    let newAssociations = []
-    // console.log(`Word: ${word.results}`);
-    if(word.results.length > 0) {
-        word.results.forEach((result) => {
-            // console.log(result);
-            // console.log(result[category]);
-            if(result[category] != null && result[category].length > 0) {
+//#endregion
+
+// #region Data Retrieval
+
+function retrieveAssociationData(wordObj, category) {
+    associations = []
+    if(wordObj.results.length > 0) {
+        // console.log(wordObj.results)
+        wordObj.results.forEach((result) => {
+            // console.log(result[category])
+            if(result[category] && result[category].length > 0) {
                 result[category].forEach((element) => {
-                    newAssociations.push(element);
+                    console.log(`- ${category}: ${element}`)
+                    associations.push(element);
                 })
             }
         })
-        // console.log(`Associations to ${newAssociations}`)
-        newAssociations = [...new Set(newAssociations)]
-        // console.log(newAssociations);
-        return newAssociations;
+
+        associations = [...new Set(associations)]
     }
 }
 
+// #endregion
+
+//#region Search Functions
+
+function findBubbleFromEllipse(ellipseID) {
+    for(let bubble of associateBubbles) {
+        if(bubble.ellipse.node.id === ellipseID) {
+            return bubble;
+        }
+    }
+
+    console.log('EllipseID: ' + ellipseID + ' not found')
+}
+
+function findBubbleFromText(textID) {
+    for(let bubble of associateBubbles) {
+        if(bubble.label.node.id === textID) {
+            return bubble;
+        }
+    }
+    console.log('TextID: ' + textID + ' not found')
+}
+
+// #endregion
+
+// #region Mouse Interaction
+
 function bubbleInteractLoop() {
     associateBubbles.forEach((bubble, i) => {
-        bubbleInteraction(bubble);
+        bubbleInteract(bubble);
     })
 }
 
-function bubbleInteraction(bubble) {        
-    bubble.ellipse.on('click', clickOn);
-    
+function bubbleInteract(bubble) {        
+    bubble.ellipse.on('click', clickOn);    
     bubble.ellipse.on('mouseover', hoverOver);
     bubble.ellipse.on('mouseleave', hoverOff);
 }
     
 function clickOn() {
     console.log('Clicked On: ' + this.node.id);
-
     let wordString = findBubbleFromEllipse(this.node.id).wordObj;
     console.log('New word: ' + wordString)
     getWordData(wordString);
 }
 
-function findBubbleFromEllipse(ellipseID) {
-    let foundBubble;
-
-    for(let bubble of associateBubbles) {
-        console.log('Searching: ' + bubble.ellipse.node.id)
-
-        console.log('Comparing to EllipseID: ' + ellipseID)
-        if(bubble.ellipse.node.id === ellipseID) {
-            console.log(bubble);
-            foundBubble = bubble;
-        }
-    }
-    
-    if(foundBubble) return foundBubble;
-    console.log('EllipseID: ' + ellipseID + ' not found')
-}
-
-function findBubbleFromText(textID) {
-    associateBubbles.forEach((bubble) => {
-
-        console.log('Searching: ' + bubble.label.node.id)
-
-        if(bubble.label.node.id == textID) {
-            return bubble;
-        }
-    })
-    console.log('TextID: ' + textID + ' not found')
-}
-
 function hoverOver() {
-    this.fill(hoverColour);
+    this.fill(bubbleHoverColour);
 }
 
 function hoverOff() {
-    this.fill(normalColour);
+    this.fill(bubbleIdleColour);
 }
+
+// #endregion

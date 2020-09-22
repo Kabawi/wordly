@@ -1,9 +1,9 @@
-import { getWordData } from './../dataRetrieval.js';
+// import { getWordData } from './../dataRetrieval.js';
 
 //Bubble Specs
 let size = {width: 170, height: 75}
-let normalColour = "white";
-let hoverColour = "grey"
+let bubbleIdleColour = "white";
+let bubbleHoverColour = "grey"
 
 let firstRadiusCount = 6;
 let firstRadiusDegrees = 360 / firstRadiusCount;
@@ -11,16 +11,26 @@ let firstRadiusDegrees = 360 / firstRadiusCount;
 let secondRadiusCount = 8;
 let secondRadiusDegrees = 360 / secondRadiusCount;
 
-export function createBubble(draw, value, pos, focusing) {
 
-    // let draw = document.getElementById('navigator');
+// let draw = 
+// let bubbleObj
+
+function getDraw() {
+
+    // draw = document.getElementById('navigator');
     // let bubbleObj = SVG(navigator);
+}
 
+export function createFocusBubble(draw, value, pos) {
+    return createBubble(draw, value, pos, true);
+}
+
+export function createBubble(draw, value, pos, focusing) {
     //Draw Bubble
     let bubbleEllipse = draw.ellipse(size.width, size.height)
     .move(pos.x - size.width / 2, draw.height() - pos.y - size.height / 2)
     .stroke({width: 2, color: "black"})
-    .fill(normalColour);
+    .fill(bubbleIdleColour);
 
     //Draw Label & Text
     let bubbleLabel;
@@ -28,20 +38,19 @@ export function createBubble(draw, value, pos, focusing) {
         bubbleLabel = drawLabel(draw, value.word, bubbleEllipse);
     } else {
         bubbleLabel = drawLabel(draw, value, bubbleEllipse);
-    }    
+    }
 
-    // console.log(ellipse.node.id)
-    // if(!bool) console.log("FALSE")
+    //Create Bubble Object
+    let bubbleObj = {wordObj: value, ellipse: bubbleEllipse, label: bubbleLabel};
+    return bubbleObj;
+}
 
+function ignoreLabelPointer() {
     // draw.setAttribute("display", "block")
     // let text = document.querySelector('text')
     // text.setAttribute("pointer-events", "none");//.attr("pointer-events: none")
 
     // bubbleLabel.off('mouseover','mouseleave')
-
-    //Create Bubble Object
-    let bubbleObj = {wordObj: value, ellipse: bubbleEllipse, label: bubbleLabel};
-    return bubbleObj;
 }
 
 function drawLabel(draw, value, ellipse) {
@@ -96,13 +105,6 @@ export function createAssociateBubbles(draw, focusBubble, associations) {
     }
 }
 
-// export function onHover(){
-//     associateBubbles.forEach((associateBubble) => {
-//         associateBubble.on('mouseover', hoverOver);
-//         associateBubble.on('mouseleave', hoverOff);
-//     })
-// }
-
 export function findPositionAroundFocus(radius, focusBubble, degrees, index, xOffset = 0, yOffset = 0, angleOffset = 0) {
     let x = 0;
     let y = 0;
@@ -132,17 +134,4 @@ function getRadians(degrees) {
     return radians;
 }
 
-
-// function setPosition(draw, bubbleObj, newPosition) {
-//     //find bubble in svg
-
-//     //set ellipse and label positions
-// }
-
-// export function changeLabel(focusBubble, value) {
-//     // focusBubble.label.text(value.word);
-//     // console.log(focusBubble)
-// }
-
-
-export { normalColour, hoverColour }
+export { bubbleIdleColour, bubbleHoverColour }
