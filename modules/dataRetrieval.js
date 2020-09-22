@@ -67,11 +67,11 @@ export function getWordData(word) {
         //display frequency element
         // let wordFreq = document.getElementById('wordFreq')
         //display data if available
-//         if (data.frequency) {
-//             wordFreq = textContent = `Frequency: ${data.frequency}`
-//         } else {
-//             wordFreq = ''
-//         }
+        // if (data.frequency) {
+        //     wordFreq = textContent = `Frequency: ${data.frequency}`
+        // } else {
+        //     wordFreq = ''
+        // }
     })  
 
     .catch((error) => { console.error(error) })
