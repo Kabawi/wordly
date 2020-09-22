@@ -35,6 +35,10 @@
   height: 80vh;
 }
 
+#definitionsList > li {
+  margin-right: 2rem;
+}
+
 #bubble_normal {
   fill: #E7BB29;
 }
