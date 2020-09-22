@@ -1,5 +1,6 @@
 import { API_KEY } from './keys.js';
 import { setWord } from './webNavigator/webNavigator.js';
+import { displayWordInfo } from './infoDisplay.js';
 
 export function getWordData(word) {
 
@@ -19,7 +20,7 @@ export function getWordData(word) {
 
         //Change Navigator Focus
         setWord(data);
-
+        displayWordInfo(data);
         // console.log(data)
         // console.log(data.word)
     
