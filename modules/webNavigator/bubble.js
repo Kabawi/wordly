@@ -1,3 +1,5 @@
+import { getWordData } from './../dataRetrieval.js';
+
 //Bubble Specs
 let size = {width: 170, height: 75}
 let normalColour = "white";
@@ -8,8 +10,6 @@ let firstRadiusDegrees = 360 / firstRadiusCount;
 
 let secondRadiusCount = 8;
 let secondRadiusDegrees = 360 / secondRadiusCount;
-
-
 
 export function createBubble(draw, value, pos, focusing) {
 
@@ -28,11 +28,11 @@ export function createBubble(draw, value, pos, focusing) {
         bubbleLabel = drawLabel(draw, value.word, bubbleEllipse);
     } else {
         bubbleLabel = drawLabel(draw, value, bubbleEllipse);
-    }
+    }    
 
-    bubbleEllipse.on('mouseover', hoverOver);
-    bubbleEllipse.on('mouseleave', hoverOff);
- 
+    // console.log(ellipse.node.id)
+    // if(!bool) console.log("FALSE")
+
     // draw.setAttribute("display", "block")
     // let text = document.querySelector('text')
     // text.setAttribute("pointer-events", "none");//.attr("pointer-events: none")
@@ -96,12 +96,12 @@ export function createAssociateBubbles(draw, focusBubble, associations) {
     }
 }
 
-export function onHover(){
-    associateBubbles.forEach((associateBubble) => {
-        associateBubble.on('mouseover', hoverOver);
-        associateBubble.on('mouseleave', hoverOff);
-    })
-}
+// export function onHover(){
+//     associateBubbles.forEach((associateBubble) => {
+//         associateBubble.on('mouseover', hoverOver);
+//         associateBubble.on('mouseleave', hoverOff);
+//     })
+// }
 
 export function findPositionAroundFocus(radius, focusBubble, degrees, index, xOffset = 0, yOffset = 0, angleOffset = 0) {
     let x = 0;
@@ -132,16 +132,6 @@ function getRadians(degrees) {
     return radians;
 }
 
-function hoverOver() {
-    this.fill(hoverColour);
-    // focus_label.text(`${this.data[focus].toFixed(2)}`)
-    // .move(this.x() + 31/2, this.y());
-}
-
-function hoverOff() {
-    this.fill(normalColour);
-    // focus_label.text('');
-}
 
 // function setPosition(draw, bubbleObj, newPosition) {
 //     //find bubble in svg
@@ -153,3 +143,6 @@ function hoverOff() {
 //     // focusBubble.label.text(value.word);
 //     // console.log(focusBubble)
 // }
+
+
+export { normalColour, hoverColour }

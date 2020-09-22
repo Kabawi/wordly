@@ -1,0 +1,28 @@
+
+$bubbleNormalColour: #fff;
+$bubbleHoverColour: rgb(211, 211, 211);
+
+.btn-outline-success {
+    color: #fff;
+    background-color: #0495c9;
+    border-color: #357ebd; /*set the color you want here*/
+}
+.btn-outline-success:hover, .btn-outline-success:focus, .btn-outline-success:active, .btn-outline-success.active, .open>.dropdown-toggle.btn-outline-success {
+    color: #fff;
+    background-color: #00b3db;
+    border-color: #285e8e; /*set the color you want here*/
+}
+
+#navigator {
+    height: 50vh;
+    width: 60vw;
+    display: block;    
+}
+
+#bubble_normal {
+    fill: $bubbleNormalColour;
+}
+
+#bubble_hover {
+    fill: $bubbleHoverColour;
+}
