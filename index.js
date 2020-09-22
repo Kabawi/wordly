@@ -2,7 +2,8 @@ import { getWordData } from './modules/dataRetrieval.js';
 import { setCategory } from './modules/webNavigator/webNavigator.js';
 
 
-function getValueThenData() {
+function getValueThenData(event) {
+    event.preventDefault()
     const searchInput = document.getElementById("searchInput").value;
     console.log(searchInput);
     getWordData(searchInput);
@@ -10,8 +11,6 @@ function getValueThenData() {
 
 window.onload = () => {
     document.querySelector("#categories").addEventListener("change", categoryDropdown);
-    
-    
     document.getElementById("searchForm").onsubmit = getValueThenData;
 }
 
