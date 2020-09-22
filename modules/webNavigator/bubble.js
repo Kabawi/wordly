@@ -2,6 +2,7 @@
 
 //Bubble Specs
 let size = {width: 170, height: 75}
+let focusBubbleIdle = "#E7BB29";
 let bubbleIdleColour = "white";
 let bubbleHoverColour = "grey"
 
@@ -30,14 +31,16 @@ export function createBubble(draw, value, pos, focusing) {
     let bubbleEllipse = draw.ellipse(size.width, size.height)
     .move(pos.x - size.width / 2, draw.height() - pos.y - size.height / 2)
     .stroke({width: 2, color: "black"})
-    .fill(bubbleIdleColour);
+    
 
     //Draw Label & Text
     let bubbleLabel;
     if(focusing) {
         bubbleLabel = drawLabel(draw, value.word, bubbleEllipse);
+        bubbleEllipse.fill(focusBubbleIdle);
     } else {
         bubbleLabel = drawLabel(draw, value, bubbleEllipse);
+        bubbleEllipse.fill(bubbleIdleColour)
     }
 
     //Create Bubble Object

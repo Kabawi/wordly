@@ -1,5 +1,5 @@
 
-$bubbleNormalColour: #fff;
+$bubbleNormalColour: #E7BB29;
 $bubbleHoverColour: rgb(211, 211, 211);
 
 .btn-outline-success {
@@ -13,10 +13,23 @@ $bubbleHoverColour: rgb(211, 211, 211);
     border-color: #285e8e; /*set the color you want here*/
 }
 
-#navigator {
-    height: 50vh;
-    width: 60vw;
+#navbar {
+    background-color: #E7BB29;
+    color: rgb(31, 31, 31);
+    font-weight: 700;
+    font-size: 50px;
+}
+
+#navigatorBox {
+    height: 80vh;
+    // width: 120vw;
     display: block;    
+}
+
+#navigator {
+    // height: 80vh;
+    // width: 120vw;
+    // display: block;    
 }
 
 #controls {
