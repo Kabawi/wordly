@@ -1,5 +1,6 @@
 //Navigator Specs
-import { createBubble, createAssociateBubbles, onHover } from './bubble.js';
+import { getWordData } from './../dataRetrieval.js';
+import { createBubble, createAssociateBubbles, normalColour, hoverColour } from './bubble.js';
 
 let navigatorSize = {width: 1200, height: 800};
 
@@ -29,9 +30,12 @@ export function setCategory(category) {
 function drawToScreen(wordObj) {
     // console.log("Drawing to Screen");
     draw.clear();
-    border = draw.polyline(`0,0 0,${navigatorSize.height}, ${navigatorSize.width},${navigatorSize.height}, ${navigatorSize.width},0 0,0`).fill(backgroundColour).stroke({width: 4, color: "black"});
+    border = draw.polyline(`0,0 0,${navigatorSize.height}, ${navigatorSize.width},${navigatorSize.height}, ${navigatorSize.width},0 0,0`)
+    .fill(backgroundColour).stroke({width: 4, color: "black"});
     focusBubble = createBubble(draw, wordObj, focusPosition, true);
     setAssociations(focusBubble);
+
+    bubbleInteractLoop();
     // onHover();
 }
 
@@ -43,7 +47,7 @@ function setAssociations(focusBubble) {
 }
 
 function getAssociations(word, category) {
-    console.log(category)
+    // console.log(category)
     let newAssociations = []
     // console.log(`Word: ${word.results}`);
     if(word.results.length > 0) {
@@ -61,6 +65,62 @@ function getAssociations(word, category) {
         // console.log(newAssociations);
         return newAssociations;
     }
+}
 
+function bubbleInteractLoop() {
+    associateBubbles.forEach((bubble, i) => {
+        bubbleInteraction(bubble);
+    })
+}
+
+function bubbleInteraction(bubble) {        
+    bubble.ellipse.on('click', clickOn);
     
+    bubble.ellipse.on('mouseover', hoverOver);
+    bubble.ellipse.on('mouseleave', hoverOff);
+}
+    
+function clickOn() {
+    console.log('Clicked On: ' + this.node.id);
+
+    let wordString = findBubbleFromEllipse(this.node.id).wordObj;
+    console.log('New word: ' + wordString)
+    getWordData(wordString);
+}
+
+function findBubbleFromEllipse(ellipseID) {
+    let foundBubble;
+
+    for(let bubble of associateBubbles) {
+        console.log('Searching: ' + bubble.ellipse.node.id)
+
+        console.log('Comparing to EllipseID: ' + ellipseID)
+        if(bubble.ellipse.node.id === ellipseID) {
+            console.log(bubble);
+            foundBubble = bubble;
+        }
+    }
+    
+    if(foundBubble) return foundBubble;
+    console.log('EllipseID: ' + ellipseID + ' not found')
+}
+
+function findBubbleFromText(textID) {
+    associateBubbles.forEach((bubble) => {
+
+        console.log('Searching: ' + bubble.label.node.id)
+
+        if(bubble.label.node.id == textID) {
+            return bubble;
+        }
+    })
+    console.log('TextID: ' + textID + ' not found')
+}
+
+function hoverOver() {
+    this.fill(hoverColour);
+}
+
+function hoverOff() {
+    this.fill(normalColour);
 }
