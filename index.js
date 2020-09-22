@@ -1,10 +1,18 @@
 import { getWordData } from './modules/dataRetrieval.js';
 import { setCategory } from './modules/webNavigator/webNavigator.js';
 
-getWordData('manifest');
+
+function getValueThenData() {
+    const searchInput = document.getElementById("searchInput").value;
+    console.log(searchInput);
+    getWordData(searchInput);
+}
 
 window.onload = () => {
     document.querySelector("#categories").addEventListener("change", categoryDropdown);
+    
+    
+    document.getElementById("searchForm").onsubmit = getValueThenData;
 }
 
 function categoryDropdown(event) {
