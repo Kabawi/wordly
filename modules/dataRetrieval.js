@@ -74,5 +74,8 @@ export function getWordData(word) {
         // }
     })  
 
-    .catch((error) => { console.error(error) })
+    .catch((error) => { 
+        console.error(error) 
+        window.alert("looks like that isn't a word we have on file. Please try searching a different word.")
+    })
 }
