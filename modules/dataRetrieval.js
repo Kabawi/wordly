@@ -1,7 +1,7 @@
 import { API_KEY } from './keys.js';
 import { setWord } from './webNavigator/webNavigator.js';
 
-export function getWordData(word, ) {
+export function getWordData(word) {
 
     const results = {
 
