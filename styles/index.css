@@ -11,10 +11,14 @@
 
 #navigator {
     height: 50vh;
-    width: 60vw;
+    width: 70vw;
     display: block;
 }
 
 #navigator:hover {
     fill: "grey"
+}
+
+#definitionsList > li {
+    padding-right: 5rem;
 }
