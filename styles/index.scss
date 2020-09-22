@@ -26,11 +26,11 @@ $bubbleHoverColour: rgb(211, 211, 211);
     display: block;    
 }
 
-#navigator {
-    // height: 80vh;
-    // width: 120vw;
-    // display: block;    
-}
+// #navigator {
+//     height: 80vh;
+//     width: 120vw;
+//     display: block;    
+// }
 
 #controls {
     width:20vw;
@@ -41,6 +41,10 @@ $bubbleHoverColour: rgb(211, 211, 211);
     overflow-y: auto;
     direction: ltr;
     height: 80vh;
+}
+
+#definitionsList > li {
+    margin-right: 2rem;
 }
 
 #bubble_normal {
