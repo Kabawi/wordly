@@ -12,9 +12,15 @@
   /*set the color you want here*/
 }
 
-#navigator {
-  height: 50vh;
-  width: 60vw;
+#navbar {
+  background-color: #E7BB29;
+  color: #1f1f1f;
+  font-weight: 700;
+  font-size: 50px;
+}
+
+#navigatorBox {
+  height: 80vh;
   display: block;
 }
 
@@ -30,7 +36,7 @@
 }
 
 #bubble_normal {
-  fill: #fff;
+  fill: #E7BB29;
 }
 
 #bubble_hover {
