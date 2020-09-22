@@ -3,7 +3,7 @@ import { getWordData } from './../dataRetrieval.js';
 import { createFocusBubble, createAssociateBubbles, bubbleIdleColour, bubbleHoverColour } from './bubble.js';
 
 // SVG Canvas
-let svgSize = {width: 1200, height: 800};
+let svgSize = {width: 1200, height: 900};
 let svgCentre = {x: svgSize.width / 2, y: svgSize.height / 2};
 
 let svgBackground;
@@ -121,9 +121,16 @@ function bubbleInteract(bubble) {
     
 function clickOn() {
     console.log('Clicked On: ' + this.node.id);
-    let wordString = findBubbleFromEllipse(this.node.id).wordObj;
-    console.log('New word: ' + wordString)
-    getWordData(wordString);
+
+    let bubbleObj = findBubbleFromEllipse(this.node.id);
+
+    let timeOut = 1200;
+
+    moveBubbleToCentre(bubbleObj, timeOut);
+
+    let wordString = bubbleObj.wordObj;
+    console.log('New word: ' + bubbleObj.wordObj)
+    setTimeout(() => { getWordData(wordString) }, timeOut);
 }
 
 function hoverOver() {
@@ -135,3 +142,31 @@ function hoverOff() {
 }
 
 // #endregion
+
+//#region Animate Bubbles
+
+function fadeBubbleOut(bubbleObj, timeOut) {
+
+}
+
+function fadeBubbleIn(bubbleObj, timeOut) {
+
+}
+
+function moveBubbleToCentre(bubbleObj, timeOut) {
+
+    let newEllipsePos= {
+        x: svgCentre.x - bubbleObj.ellipse.width() / 2,
+        y: draw.height() - svgCentre.y - bubbleObj.ellipse.height() / 2
+    }
+
+    bubbleObj.ellipse.animate(timeOut)
+    .move(newEllipsePos.x, newEllipsePos.y)
+
+    bubbleObj.label.animate(timeOut)
+    .move(bubbleObj.ellipse.width() / 2 + newEllipsePos.x, bubbleObj.ellipse.height() / 3 + newEllipsePos.y);
+    // .move(bubbleObj.ellipse.width() / 2 + bubbleObj.ellipse.x(),
+    //         bubbleObj.ellipse.height() / 3 + bubbleObj.ellipse.y());
+}
+
+//#endregion
