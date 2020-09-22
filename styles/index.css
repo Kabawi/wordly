@@ -12,4 +12,9 @@
 #navigator {
     height: 50vh;
     width: 60vw;
+    display: block;
+}
+
+#navigator:hover {
+    fill: "grey"
 }
