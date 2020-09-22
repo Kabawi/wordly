@@ -24,6 +24,12 @@ $bubbleHoverColour: rgb(211, 211, 211);
     display: block;
 }
 
+#infoDisplay {
+    overflow-y: auto;
+    direction: ltr;
+    height: 80vh;
+}
+
 #bubble_normal {
     fill: $bubbleNormalColour;
 }

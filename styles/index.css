@@ -23,6 +23,12 @@
   display: block;
 }
 
+#infoDisplay {
+  overflow-y: auto;
+  direction: ltr;
+  height: 80vh;
+}
+
 #bubble_normal {
   fill: #fff;
 }
