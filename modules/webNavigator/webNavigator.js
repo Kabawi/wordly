@@ -164,9 +164,8 @@ function moveBubbleToCentre(bubbleObj, timeOut) {
     .move(newEllipsePos.x, newEllipsePos.y)
 
     bubbleObj.label.animate(timeOut)
-    .move(bubbleObj.ellipse.width() / 2 + newEllipsePos.x, bubbleObj.ellipse.height() / 3 + newEllipsePos.y);
-    // .move(bubbleObj.ellipse.width() / 2 + bubbleObj.ellipse.x(),
-    //         bubbleObj.ellipse.height() / 3 + bubbleObj.ellipse.y());
+    .move(bubbleObj.ellipse.width() / 2 + newEllipsePos.x,
+        bubbleObj.ellipse.height() / 3 + newEllipsePos.y);
 }
 
 //#endregion

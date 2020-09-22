@@ -19,6 +19,11 @@ $bubbleHoverColour: rgb(211, 211, 211);
     display: block;    
 }
 
+#controls {
+    width:20vw;
+    display: block;
+}
+
 #bubble_normal {
     fill: $bubbleNormalColour;
 }
