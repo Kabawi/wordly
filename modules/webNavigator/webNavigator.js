@@ -1,17 +1,10 @@
 //Navigator Specs
 import { createBubble, createAssociateBubbles } from './bubble.js';
 
-
-const navigator = document.querySelector('#navigator');
-const navigatorStyle = getComputedStyle(navigator)
-
-console.log(`${navigatorStyle.width}, ${navigatorStyle.height}`);
-
 let navigatorSize = {width: 1200, height: 800};
 
-// let navigatorSize = {width: navigatorStyle.width, height: navigatorStyle.height};
-
-let draw = SVG('navigator').size(navigatorSize.width, navigatorSize.height);
+let draw = SVG(`navigator`);
+draw.size(navigatorSize.width, navigatorSize.height)
 
 let backgroundColour = "white"
 let border;
@@ -32,10 +25,9 @@ export function setCategory(category) {
     drawToScreen(focusBubble.wordObj);
 }
 
-
 function drawToScreen(wordObj) {
     draw.clear();
-    border = draw.polyline('0,0 0,800, 1200,800, 1200,0 0,0').fill(backgroundColour).stroke({width: 4, color: "black"});
+    border = draw.polyline(`0,0 0,${navigatorSize.height}, ${navigatorSize.width},${navigatorSize.height}, ${navigatorSize.width},0 0,0`).fill(backgroundColour).stroke({width: 4, color: "black"});
     focusBubble = createBubble(draw, wordObj, focusPosition, true);
     setAssociations(focusBubble);
 }

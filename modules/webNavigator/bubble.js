@@ -8,7 +8,6 @@ let firstRadiusDegrees = 360 / firstRadiusCount;
 let secondRadiusCount = 8;
 let secondRadiusDegrees = 360 / secondRadiusCount;
 
-
 export function createBubble(draw, value, pos, focusing) {
     //Draw Bubble
     let bubbleEllipse = draw.ellipse(size.width, size.height)
