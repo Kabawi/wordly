@@ -11,6 +11,10 @@ function getValueThenData(event) {
 
 window.onload = () => {
     document.querySelector("#categories").addEventListener("change", categoryDropdown);
+    // document.querySelector("#categoryRadio").addEventListener("click", categoryDropdown);
+    // document.getElementById("#chooseSynonyms").addEventListener("click", categoryDropdown);
+    // document.getElementById("#chooseSimilarWords").addEventListener("click", categoryDropdown);
+    // addCategoryRadio()
     document.getElementById("searchForm").onsubmit = getValueThenData;
     getWordData('word');
 }
@@ -18,3 +22,10 @@ window.onload = () => {
 function categoryDropdown(event) {
     setCategory(event.target.value);
 }
+
+// function addCategoryRadio() {
+//     let categoryRadioButtons = document.getElementById("categoryRadio").getElementsByName("options");
+//     categoryRadioButtons.forEach(element => {
+//         element.addEventListener("click", categoryDropdown);
+//     });
+// }
