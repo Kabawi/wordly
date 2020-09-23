@@ -64,6 +64,7 @@
   overflow-y: auto;
   direction: ltr;
   height: 80vh;
+  width: 40vw;
 }
 
 #title {
@@ -87,5 +88,61 @@
 
 #definitionsList > li {
   margin-right: 2rem;
+}
+
+#bubble-fade-out {
+  fill: #fff59e;
+  color: #fff59e;
+  background-color: #fff59e;
+}
+
+@-webkit-keyframes bubbleFadeOut {
+  15% {
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
+  }
+  65% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 0;
+  }
+}
+
+@keyframes bubbleFadeOut {
+  15% {
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
+  }
+  65% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 0;
+  }
+}
+
+#hg2 {
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
+}
+
+#hg3 {
+  -webkit-animation-delay: 1.0s;
+          animation-delay: 1.0s;
+}
+
+#hg4 {
+  -webkit-animation-delay: 1.5s;
+          animation-delay: 1.5s;
+}
+
+#hg5 {
+  -webkit-animation-delay: 2.0s;
+          animation-delay: 2.0s;
 }
 /*# sourceMappingURL=index.css.map */

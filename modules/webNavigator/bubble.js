@@ -1,9 +1,10 @@
 
 //Bubble Specs
 let size = {width: 170, height: 75}
-let focusBubbleIdle = "#E7BB29";
-let bubbleIdleColour = "white";
-let bubbleHoverColour = "grey"
+let focusBubbleIdleColour = "#E7BB29";
+let bubbleIdleColour = "#fff59e";
+let bubbleHoverColour = "#ffed4e"
+let bubbleStrokeColour = "black";
 
 let firstRadiusCount = 6;
 let firstRadiusDegrees = 360 / firstRadiusCount;
@@ -32,7 +33,7 @@ export function createBubble(draw, value, pos, focusing) {
     let bubbleLabel;
     if(focusing) {
         bubbleLabel = drawLabel(draw, value.word, bubbleEllipse);
-        bubbleEllipse.fill(focusBubbleIdle);
+        bubbleEllipse.fill(focusBubbleIdleColour);
     } else {
         bubbleLabel = drawLabel(draw, value, bubbleEllipse);
         bubbleEllipse.fill(bubbleIdleColour)
@@ -132,4 +133,4 @@ function getRadians(degrees) {
     return radians;
 }
 
-export { bubbleIdleColour, bubbleHoverColour }
+export { bubbleIdleColour, bubbleHoverColour, focusBubbleIdleColour, bubbleStrokeColour }
