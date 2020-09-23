@@ -16,7 +16,6 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-            
             <ul class="nav navbar-nav ml-auto">
               <form id="searchForm" class="form-inline mx-3">
                 <input id="searchInput" class="form-control mr-sm-2" type="search" placeholder="Type a word.." aria-label="Search">
@@ -32,13 +31,25 @@
             <!-- content -->
             <div id="main" class="mt-3 d-flex flex-row justify-content-between">
               <!-- controls section -->
-              <div id="controls" class="mx-4">
+              <div id="controls" class="mx-4 d-inline-flex flex-column">
                   <h4>Controls</h4>
                   <!-- Categories Dropdown -->
                   <select id="categories">
                     <option value="synonyms">Synonyms</option>
                     <option value="similarTo">Similar Words</option>
                   </select>
+                  <!-- radio buttons -->
+                  <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary active">
+                      <input type="radio" name="options" id="option1" autocomplete="off" checked> Synonyms
+                    </label>
+                    <label class="btn btn-secondary">
+                      <input type="radio" name="options" id="option2" autocomplete="off"> Similar words
+                    </label>
+                    <label class="btn btn-secondary">
+                      <input type="radio" name="options" id="option3" autocomplete="off"> Antonyms
+                    </label>
+                  </div>
                 </div>
                 <div id="navigatorBox" class="mx-2">
                     <svg id="navigator"                    
@@ -50,7 +61,7 @@
                 </div>
                 <div id="infoDisplay" class="mx-2">
                   <div id="definitions">
-                    <h3 id="title"></h3>
+                    <h3 id="title" class="mb-2"></h3>
                     <ul id="definitionsList"></ul>
                     </div>
                     <div id="frequency"></div>

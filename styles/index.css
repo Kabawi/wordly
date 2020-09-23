@@ -35,6 +35,10 @@
   height: 80vh;
 }
 
+#title {
+  font-style: italic;
+}
+
 #definitionsList > li {
   margin-right: 2rem;
 }

@@ -12,6 +12,7 @@ function getValueThenData(event) {
 window.onload = () => {
     document.querySelector("#categories").addEventListener("change", categoryDropdown);
     document.getElementById("searchForm").onsubmit = getValueThenData;
+    getWordData('word');
 }
 
 function categoryDropdown(event) {
