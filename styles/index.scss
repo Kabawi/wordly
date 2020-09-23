@@ -82,6 +82,7 @@ $searchButtonBorder: rgb(48, 48, 48);
     overflow-y: auto;
     direction: ltr;
     height: 80vh;
+    width:40vw;
 }
 
 #title {
@@ -105,29 +106,12 @@ $searchButtonBorder: rgb(48, 48, 48);
 
 #definitionsList > li {
     margin-right: 2rem;
-<<<<<<< HEAD
-    // border: 1px solid red;
 }
-=======
-}
-
-// #bubble {
-    
-// }
 
 #bubble-fade-out {
     fill: $bubbleIdleColour;
     color: $bubbleIdleColour;
     background-color: $bubbleIdleColour;
-    
-
-
-//     fill: #E7BB29;
-// // background-color: #E7BB29;
-    
-//     opacity: 0;
-    
-//     animation: 5.5s bubbleFadeOut infinite;
 }
 
 
@@ -153,4 +137,3 @@ $searchButtonBorder: rgb(48, 48, 48);
 #hg3 {animation-delay: 1.0s}
 #hg4 {animation-delay: 1.5s}
 #hg5 {animation-delay: 2.0s}
->>>>>>> Web_Navigator

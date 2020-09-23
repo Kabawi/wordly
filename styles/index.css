@@ -64,6 +64,7 @@
   overflow-y: auto;
   direction: ltr;
   height: 80vh;
+  width: 40vw;
 }
 
 #title {
