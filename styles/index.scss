@@ -46,15 +46,33 @@ $searchButtonBorder: rgb(48, 48, 48);
     display: block;    
 }
 
-#navigator {
-    // height: 80vh;
-    // width: 120vw;
-    // display: block;    
-}
+// #navigator {
+//     height: 80vh;
+//     width: 120vw;
+//     display: block;    
+// }
 
 #controls {
-    width:20vw;
+    width:10vw;
     display: block;
+    font-size: 16px;
+}
+
+#controls-heading {
+    font-size: 30px;
+    height: 5%;
+}
+
+#categories {
+    width: 90%;
+    height: 60%;
+    font-weight: 600;
+}
+
+#categories-heading {
+    width: 5%;
+    height: 3%;
+    font-size: 16px;
 }
 
 #infoDisplay {
@@ -63,10 +81,6 @@ $searchButtonBorder: rgb(48, 48, 48);
     height: 80vh;
 }
 
-// #bubble_normal {
-//     fill: $bubbleNormalColour;
-// }
-
-// #bubble_hover {
-//     fill: $bubbleHoverColour;
-// }
+#definitionsList > li {
+    margin-right: 2rem;
+}

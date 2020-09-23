@@ -26,30 +26,36 @@
                 <div class="navbar-nav">
                   <a class="nav-item nav-link mx-3" href="https://github.com/Kabawi/wordly" id="navbar-link">GitHub</a>
                 </div>
-              </div>
+            </div>
             </ul>
             </nav>
-
-            <!-- controls section -->
-            
             <!-- content -->
-            <div id="main" class="mt-5 d-flex flex-row justify-content-between">
-                <div id="controls" class="mx-2">
-                  <h4>Controls</h4>
+            <div id="main" class="mt-3 d-flex flex-row justify-content-between">
+              <!-- controls section -->
+
+              <div id="controls" class="mx-4">
+                  <h4 id="controls-heading">CONTROLS</h4>
+
                   <!-- Categories Dropdown -->
-                  <select id="categories">
-                    <option value="synonyms">Synonyms</option>
-                    <option value="similarTo">Similar Words</option>
-                  </select>
+                  <div id="categories">
+                    <h6 id="categories-heading">CATEGORIES</h6>
+                    <select>
+                      <option value="synonyms">Synonyms</option>
+                      <option value="similarTo">Similar Words</option>
+                    </select>
+                  </div>
+
                 </div>
-                <div id="navigatorBox">
+
+                <!-- Navigator Box -->
+                <div id="navigatorBox" class="mx-2">
                     <svg id="navigator"                    
-                        width="80%"
+                        height="80%"
                         viewBox="0 0 1100 800"
                         preserveAspectRatio="xMidYMid meet" >
                     </svg>
                 </div>
-                <div id="infoDisplay" class="mr-4">
+                <div id="infoDisplay" class="mx-5">
                   <div id="definitions">
                     <h3 id="title"></h3>
                     <ul id="definitionsList"></ul>

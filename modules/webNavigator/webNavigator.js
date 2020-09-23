@@ -42,7 +42,7 @@ function drawToScreen(wordObj) {
 function drawBackgroundAndBorder() {
     svgBackground = draw.polyline(`0,0 0,${svgSize.height}, ${svgSize.width},${svgSize.height}, ${svgSize.width},0 0,0`)
     .fill(svgBackgroundColour) // Background
-    .stroke({width: 4, color: svgBorderColour}); // Border
+    // .stroke({width: 4, color: svgBorderColour}); // Border
 }
 
 function drawFocusBubble(wordObj) {

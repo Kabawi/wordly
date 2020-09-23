@@ -1,4 +1,3 @@
-// import { getWordData } from './../dataRetrieval.js';
 
 //Bubble Specs
 let size = {width: 170, height: 75}
@@ -11,10 +10,6 @@ let firstRadiusDegrees = 360 / firstRadiusCount;
 
 let secondRadiusCount = 8;
 let secondRadiusDegrees = 360 / secondRadiusCount;
-
-
-// let draw = 
-// let bubbleObj
 
 function getDraw() {
 
