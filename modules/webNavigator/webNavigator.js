@@ -71,7 +71,7 @@ function retrieveAssociationData(wordObj, category) {
             // console.log(result[category])
             if(result[category] && result[category].length > 0) {
                 result[category].forEach((element) => {
-                    console.log(`- ${category}: ${element}`)
+                    // console.log(`- ${category}: ${element}`)
                     associations.push(element);
                 })
             }
@@ -125,7 +125,7 @@ function clickOn() {
 
     let bubbleObj = findBubbleFromEllipse(this.node.id);
 
-    let timeOut = 1200;
+    let timeOut = 500;
 
     moveBubbleToCentre(bubbleObj, timeOut);
 
