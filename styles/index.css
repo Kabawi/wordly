@@ -68,6 +68,21 @@
 
 #title {
   font-style: italic;
+  display: inline-block;
+}
+
+#pronunce {
+  font-style: italic;
+  font-size: larger;
+}
+
+#definitionsList {
+  list-style-type: none;
+  padding: 0;
+}
+
+#definitionsList > li > h6 {
+  font-weight: bold;
 }
 
 #definitionsList > li {

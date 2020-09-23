@@ -83,8 +83,24 @@ $searchButtonBorder: rgb(48, 48, 48);
 
 #title {
     font-style: italic;
+    display: inline-block;
+}
+
+#pronunce {
+    font-style: italic;
+    font-size: larger;
+}
+
+#definitionsList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#definitionsList > li > h6 {
+    font-weight: bold;
 }
 
 #definitionsList > li {
     margin-right: 2rem;
+    // border: 1px solid red;
 }
