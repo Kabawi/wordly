@@ -3,7 +3,7 @@ import { getWordData } from './../dataRetrieval.js';
 import { createFocusBubble, createAssociateBubbles, bubbleIdleColour, bubbleHoverColour } from './bubble.js';
 
 // SVG Canvas
-let svgSize = {width: 1000, height: 700};
+let svgSize = {width: 1100, height: 800};
 let svgCentre = {x: svgSize.width / 2, y: svgSize.height / 2};
 
 let svgBackground;
@@ -42,7 +42,7 @@ function drawToScreen(wordObj) {
 function drawBackgroundAndBorder() {
     svgBackground = draw.polyline(`0,0 0,${svgSize.height}, ${svgSize.width},${svgSize.height}, ${svgSize.width},0 0,0`)
     .fill(svgBackgroundColour) // Background
-    .stroke({width: 4, color: svgBorderColour}); // Border
+    // .stroke({width: 4, color: svgBorderColour}); // Border
 }
 
 function drawFocusBubble(wordObj) {

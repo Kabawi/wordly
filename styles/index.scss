@@ -1,23 +1,43 @@
 
-$bubbleNormalColour: #E7BB29;
-$bubbleHoverColour: rgb(211, 211, 211);
+$primary: #E7BB29;
+
+$searchButtonTextIdle: rgb(36, 36, 36);
+$searchButtonIdle: #fff59e;
+
+$searchButtonTextHover: rgb(71, 71, 71);
+$searchButtonHover:  #faf5ce;
+
+$searchButtonBorder: rgb(48, 48, 48);
 
 .btn-outline-success {
-    color: #fff;
-    background-color: #0495c9;
-    border-color: #357ebd; /*set the color you want here*/
+    color: $searchButtonTextIdle;
+    background-color: $searchButtonIdle;
+    border-color: $searchButtonBorder; /*set the color you want here*/
+    font-weight: 500;
 }
 .btn-outline-success:hover, .btn-outline-success:focus, .btn-outline-success:active, .btn-outline-success.active, .open>.dropdown-toggle.btn-outline-success {
-    color: #fff;
-    background-color: #00b3db;
-    border-color: #285e8e; /*set the color you want here*/
+    color: $searchButtonTextHover;
+    background-color: $searchButtonHover;
+    border-color: $searchButtonBorder; /*set the color you want here*/
+    font-weight: 500;
 }
 
 #navbar {
     background-color: #E7BB29;
+    font-weight: 700;
+    font-size: 50px;
+}
+
+#navbar-title {
     color: rgb(31, 31, 31);
     font-weight: 700;
     font-size: 50px;
+}
+
+#navbar-link {
+    color: rgb(59, 59, 59);
+    font-weight: 600;
+    font-size: 30px;
 }
 
 #navigatorBox {
@@ -33,8 +53,26 @@ $bubbleHoverColour: rgb(211, 211, 211);
 // }
 
 #controls {
-    width:20vw;
+    width:10vw;
     display: block;
+    font-size: 16px;
+}
+
+#controls-heading {
+    font-size: 30px;
+    height: 5%;
+}
+
+#categories {
+    width: 90%;
+    height: 60%;
+    font-weight: 600;
+}
+
+#categories-heading {
+    width: 5%;
+    height: 3%;
+    font-size: 16px;
 }
 
 #infoDisplay {
@@ -49,12 +87,4 @@ $bubbleHoverColour: rgb(211, 211, 211);
 
 #definitionsList > li {
     margin-right: 2rem;
-}
-
-#bubble_normal {
-    fill: $bubbleNormalColour;
-}
-
-#bubble_hover {
-    fill: $bubbleHoverColour;
 }
