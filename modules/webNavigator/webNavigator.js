@@ -1,6 +1,6 @@
 //Navigator Specs
 import { getWordData } from './../dataRetrieval.js';
-import { createFocusBubble, createAssociateBubbles, bubbleIdleColour, bubbleHoverColour } from './bubble.js';
+import { createFocusBubble, createAssociateBubbles, focusBubbleIdleColour, bubbleIdleColour, bubbleHoverColour, bubbleStrokeColour } from './bubble.js';
 
 // SVG Canvas
 let svgSize = {width: 1100, height: 800};
@@ -104,6 +104,10 @@ function findBubbleFromText(textID) {
     console.log('TextID: ' + textID + ' not found')
 }
 
+function getBubbleEllipseCSSID(bubbleObj) {
+
+}
+
 // #endregion
 
 // #region Mouse Interaction
@@ -125,13 +129,26 @@ function clickOn() {
 
     let bubbleObj = findBubbleFromEllipse(this.node.id);
 
-    let timeOut = 1200;
+    let timeOut = 500;
 
+    // FadeInNewBackground(timeOut);
+    FadeAllBubblesOutExcept(bubbleObj, timeOut);
     moveBubbleToCentre(bubbleObj, timeOut);
+    fadeBubbleInToFocus(bubbleObj, timeOut);
 
     let wordString = bubbleObj.wordObj;
     console.log('New word: ' + bubbleObj.wordObj)
     setTimeout(() => { getWordData(wordString) }, timeOut);
+}
+
+function FadeAllBubblesOutExcept(bubbleObj, timeOut) {
+    fadeBubbleOut(focusBubble, timeOut);
+    associateBubbles.forEach((aBubbleObj) => {
+        if(aBubbleObj != bubbleObj) {
+            // addCSSIDToBubble(bubbleObj);
+            fadeBubbleOut(aBubbleObj, timeOut);
+        }
+    })
 }
 
 function hoverOver() {
@@ -146,13 +163,67 @@ function hoverOff() {
 
 //#region Animate Bubbles
 
+function FadeInNewBackground(timeOut){
+    let fadeInWhiteBox = draw.size(draw.width(), draw.height());
+
+    fadeInWhiteBox.animate(timeOut)
+    .fill("white");
+}
+
+
 function fadeBubbleOut(bubbleObj, timeOut) {
 
+    // //JQUERY ATTEMPT
+    bubbleObj.ellipse.id = 'bubble-fade-out'
+    console.log(bubbleObj.ellipse)
+    // $(`#bubble-fade-out`).fadeOut(timeOut);
+
+    // bubbleObj.ellipse.attr({"bubble-fade-out"})
+
+    // let cssID = document.getElementById(bubbleObj.ellipse.node.id)
+
+    // console.log(`#${bubbleObj.ellipse.node.id}`)
+
+    
+
+    // SHRINKING
+    bubbleObj.ellipse.animate(timeOut / 2)
+    // .fill("white")
+    .size(0, 0)
+    .stroke({width: 0})
+
+    console.log(bubbleObj.label)
+    bubbleObj.label.animate(timeOut / 2)
+    .size(0, 0)
+}
+
+function fadeBubbleInToFocus(bubbleObj, timeOut) {
+    bubbleObj.ellipse.animate(timeOut)
+    .fill(focusBubbleIdleColour)
 }
 
 function fadeBubbleIn(bubbleObj, timeOut) {
 
+    let timeOutSeg = timeOut / 4
+    // let opacity = 1
+
+    for(let i = 1; i < 4; i++) {
+
+        bubbleObj.ellipse.animate(timeOutSeg * (i+1))
+        .fill(bubbleIdleColour)
+        .stroke({width: 2})        
+
+        bubbleObj.label.animate(timeOutSeg * (i+1))
+        .font({'size':'0px'})
+    }
 }
+
+// function addCSSIDToBubble(bubbleObj) {
+//     bubbleObj.ellipse.node.classList.add('bubble-fade-out');
+//     // bubbleObj.ellipse.node.setAttribute("bubble-fade-out", "class");
+//     console.log(bubbleObj.ellipse)
+// }
+
 
 function moveBubbleToCentre(bubbleObj, timeOut) {
 
@@ -163,6 +234,8 @@ function moveBubbleToCentre(bubbleObj, timeOut) {
 
     bubbleObj.ellipse.animate(timeOut)
     .move(newEllipsePos.x, newEllipsePos.y)
+    .fill("white")
+    
 
     bubbleObj.label.animate(timeOut)
     .move(bubbleObj.ellipse.width() / 2 + newEllipsePos.x,

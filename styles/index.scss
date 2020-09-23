@@ -4,6 +4,9 @@ $primary: #E7BB29;
 $searchButtonTextIdle: rgb(36, 36, 36);
 $searchButtonIdle: #fff59e;
 
+$bubbleIdleColour: #fff59e;
+$focusBubbleIdleColour: #E7BB29;
+
 $searchButtonTextHover: rgb(71, 71, 71);
 $searchButtonHover:  #faf5ce;
 
@@ -84,3 +87,46 @@ $searchButtonBorder: rgb(48, 48, 48);
 #definitionsList > li {
     margin-right: 2rem;
 }
+
+// #bubble {
+    
+// }
+
+#bubble-fade-out {
+    fill: $bubbleIdleColour;
+    color: $bubbleIdleColour;
+    background-color: $bubbleIdleColour;
+    
+
+
+//     fill: #E7BB29;
+// // background-color: #E7BB29;
+    
+//     opacity: 0;
+    
+//     animation: 5.5s bubbleFadeOut infinite;
+}
+
+
+
+
+// .bubble-fade-out {
+//     fill: #E7BB29;
+// // background-color: #E7BB29;
+    
+//     opacity: 0;
+    
+//     animation: 5.5s bubbleFadeOut infinite;
+// }
+
+@keyframes bubbleFadeOut {    
+    15% {opacity: 0} 
+    35% {opacity: 1}
+    65% {opacity: 1} 
+    85% {opacity: 0}
+}
+
+#hg2 {animation-delay: 0.5s}
+#hg3 {animation-delay: 1.0s}
+#hg4 {animation-delay: 1.5s}
+#hg5 {animation-delay: 2.0s}
